@@ -55,9 +55,61 @@ int main() {
             break;
         }
 
-        case 3:
-            mostrarRegistros(ptr);
+        case 3: {
+            int subopcion = menuMostrar();
+            switch(subopcion){
+                case 1:
+                    mostrarTodos(ptr);
+                    break;
+                case 2: {
+                    char carrera[20];
+                    printf("Carrera a buscar: ");
+                    scanf(" %19s", carrera);
+                    mostrarPorCarrera(ptr, carrera);
+                    break;
+                }
+                case 3: {
+                    int semestre;
+                    printf("Semestre a buscar: ");
+                    scanf("%d", &semestre);
+                    mostrarPorSemestre(ptr, semestre);
+                    break;
+                }
+                case 4: {
+                    char carrera[20];
+                    int semestre;
+                    printf("Carrera: ");
+                    scanf(" %19s", carrera);
+                    printf("Semestre: ");
+                    scanf("%d", &semestre);
+                    mostrarPorCarreraSemestre(ptr, carrera, semestre);
+                    break;
+                }
+                case 5: {
+                    char nombre[50];
+                    getchar();
+                    printf("Nombre a buscar: ");
+                    fgets(nombre, 50, stdin);
+                    nombre[strcspn(nombre, "\n")] = '\0';
+                    buscarPorNombre(ptr, nombre);
+                    break;
+                }
+                case 6: {
+                    char matricula[10];
+                    printf("Matricula a buscar: ");
+                    scanf(" %9s", matricula);
+                    buscarPorMatricula(ptr, matricula);
+                    break;
+                }
+                case 7:
+                    break;
+                default:
+                    printf("Opcion invalida.\n");
+                    break;
+            }
             break;
+        }
+
 
         case 4:
 
@@ -76,6 +128,5 @@ int main() {
 
     return 0;
 }
-
 
 
