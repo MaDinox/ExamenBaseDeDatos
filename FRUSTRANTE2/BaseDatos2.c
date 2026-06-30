@@ -4,6 +4,7 @@
 #include "altas.h"
 #include "bajas.h"
 #include "mostrar.h"
+#include "especiales.h"
 
 int main() {
     int opcion;
@@ -111,9 +112,37 @@ int main() {
         }
 
 
-        case 4:
-
+        case 4: {
+            int subopcion = menuEspeciales();
+            switch(subopcion){
+                case 1:
+                    contarAlumnos(ptr);
+                    break;
+                case 2: {
+                    char carrera[20];
+                    printf("Carrera: ");
+                    scanf(" %19s", carrera);
+                    contarPorCarrera(ptr, carrera);
+                    break;
+                }
+                case 3:
+                    promedioGeneral(ptr);
+                    break;
+                case 4: {
+                    char carrera[20];
+                    printf("Carrera: ");
+                    scanf(" %19s", carrera);
+                    promedioPorCarrera(ptr, carrera);
+                    break;
+                }
+                case 5:
+                    break;
+                default:
+                    printf("Opcion invalida.\n");
+                    break;
+            }
             break;
+        }
 
         case 5:
             printf("Saliendo del programa...\n");
@@ -128,5 +157,3 @@ int main() {
 
     return 0;
 }
-
-
