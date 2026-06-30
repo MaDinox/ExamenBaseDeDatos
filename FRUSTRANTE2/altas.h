@@ -104,5 +104,3 @@ void Altas(struct Persona **ptr) {
 }
 
 #endif
-
-
