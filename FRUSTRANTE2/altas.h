@@ -20,9 +20,8 @@ void Altas(struct Persona **ptr) {
         return;
     }
 
-    // Datos Persona
     printf("Nombre: ");
-    getchar(); // limpia buffer
+    getchar(); 
     fgets(nuevo->nombre, 50, stdin);
     nuevo->nombre[strcspn(nuevo->nombre, "\n")] = '\0';
 
@@ -35,7 +34,7 @@ void Altas(struct Persona **ptr) {
     printf("Fecha de nacimiento (dd/mm/aa): ");
     scanf(" %8s", nuevo->fn);
 
-    // Datos Alumno
+
     struct Alumno *A = (struct Alumno*) malloc(sizeof(struct Alumno));
     if (A == NULL) {
         printf("Error: no se pudo asignar memoria para Alumno.\n");
@@ -47,8 +46,8 @@ void Altas(struct Persona **ptr) {
     printf("Matricula: ");
     scanf(" %9s", A->matricula);
 
-    // limpiar buffer antes de leer carrera
-    getchar();
+    while (getchar() != '\n');
+
     printf("Carrera (ej. IDSSI): ");
     fgets(A->carrera, 20, stdin);
     A->carrera[strcspn(A->carrera, "\n")] = '\0';
@@ -56,20 +55,19 @@ void Altas(struct Persona **ptr) {
     printf("Semestre: ");
     scanf("%d", &A->semestre);
 
-    // Generar correo automáticamente
     char correoGen[50];
     char carrera2[3];
-    strncpy(carrera2, A->carrera, 2); // primeras 2 letras
+    strncpy(carrera2, A->carrera, 2); 
     carrera2[2] = '\0';
 
     char primeros4[5];
-    strncpy(primeros4, A->matricula, 4); // primeros 4 dígitos
+    strncpy(primeros4, A->matricula, 4); 
     primeros4[4] = '\0';
 
     int lenMat = strlen(A->matricula);
     char ultimos4[5];
     if (lenMat >= 4) {
-        strncpy(ultimos4, A->matricula + lenMat - 4, 4); // últimos 4 dígitos
+        strncpy(ultimos4, A->matricula + lenMat - 4, 4); 
         ultimos4[4] = '\0';
     } else {
         strcpy(ultimos4, "0000");
@@ -80,7 +78,6 @@ void Altas(struct Persona **ptr) {
 
     printf("Correo generado: %s\n", A->correo);
 
-    // Calificaciones
     printf("Ingresa las calificaciones de 5 materias:\n");
     for (int i = 0; i < 5; i++) {
         printf("\nMateria %d:\n", i+1);
@@ -107,4 +104,5 @@ void Altas(struct Persona **ptr) {
 }
 
 #endif
+
 
