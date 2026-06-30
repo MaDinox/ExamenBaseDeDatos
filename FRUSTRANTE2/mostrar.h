@@ -2,51 +2,77 @@
 #define MOSTRAR_H
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include "struct.h"
 
-void mostrarRegistros(struct Persona *ptr) {
-    if (ptr == NULL) {
-        printf(" No hay registros para mostrar.\n");
+
+void mostrarTodos(struct Persona *ptr){
+    if(ptr == NULL){
+        printf(" No hay registros.\n");
         return;
     }
-
-    struct Persona *actual = ptr;
-    int contador = 1;
-
-    while (actual != NULL) {
-        printf("\n=====================================\n");
-        printf("Registro #%d\n", contador++);
-        printf("Nombre: %s\n", actual->nombre);
-        printf("Edad: %d\n", actual->edad);
-        printf("Genero: %c\n", actual->genero);
-        printf("Fecha de nacimiento: %s\n", actual->fn);
-
-        if (actual->ptr != NULL) {
-            struct Alumno *A = actual->ptr;
-            printf("Matricula: %s\n", A->matricula);
-            printf("Carrera: %s\n", A->carrera);
-            printf("Semestre: %d\n", A->semestre);
-            printf("Correo institucional: %s\n", A->correo);
-
-            printf("Calificaciones:\n");
-            for (int i = 0; i < 5; i++) {
-                printf("  Materia %d:\n", i+1);
-                printf("    Parcial 1: %.2f\n", A->calif[i][0]);
-                printf("    Parcial 2: %.2f\n", A->calif[i][1]);
-                printf("    Parcial 3: %.2f\n", A->calif[i][2]);
-                printf("    Ordinario: %.2f\n", A->calif[i][3]);
-                printf("    Promedio final: %.2f\n", A->calif[i][4]);
-            }
-        } else {
-            printf("Este registro no tiene datos de alumno.\n");
+    while(ptr != NULL){
+        printf("\nNombre: %s\nEdad: %d\nGenero: %c\nFecha Nac: %s\n",
+               ptr->nombre, ptr->edad, ptr->genero, ptr->fn);
+        if(ptr->ptr != NULL){
+            struct Alumno *A = ptr->ptr;
+            printf("Matricula: %s\nCarrera: %s\nSemestre: %d\nCorreo: %s\n",
+                   A->matricula, A->carrera, A->semestre, A->correo);
         }
-
-        actual = actual->sig;
+        ptr = ptr->sig;
     }
+}
 
-    printf("\nFin de registros.\n");
+void mostrarPorCarrera(struct Persona *ptr, const char *carrera){
+    while(ptr != NULL){
+        if(ptr->ptr != NULL && strcmp(ptr->ptr->carrera, carrera) == 0){
+            printf("\nNombre: %s\nCarrera: %s\n", ptr->nombre, ptr->ptr->carrera);
+        }
+        ptr = ptr->sig;
+    }
+}
+
+
+void mostrarPorSemestre(struct Persona *ptr, int semestre){
+    while(ptr != NULL){
+        if(ptr->ptr != NULL && ptr->ptr->semestre == semestre){
+            printf("\nNombre: %s\nSemestre: %d\n", ptr->nombre, ptr->ptr->semestre);
+        }
+        ptr = ptr->sig;
+    }
+}
+
+void mostrarPorCarreraSemestre(struct Persona *ptr, const char *carrera, int semestre){
+    while(ptr != NULL){
+        if(ptr->ptr != NULL && strcmp(ptr->ptr->carrera, carrera) == 0 && ptr->ptr->semestre == semestre){
+            printf("\nNombre: %s\nCarrera: %s\nSemestre: %d\n", ptr->nombre, ptr->ptr->carrera, ptr->ptr->semestre);
+        }
+        ptr = ptr->sig;
+    }
+}
+
+void buscarPorNombre(struct Persona *ptr, const char *nombre){
+    while(ptr != NULL){
+        if(strcmp(ptr->nombre, nombre) == 0){
+            printf("\nEncontrado: %s\n", ptr->nombre);
+            return;
+        }
+        ptr = ptr->sig;
+    }
+    printf(" Nombre no encontrado.\n");
+}
+
+
+void buscarPorMatricula(struct Persona *ptr, const char *matricula){
+    while(ptr != NULL){
+        if(ptr->ptr != NULL && strcmp(ptr->ptr->matricula, matricula) == 0){
+            printf("\nEncontrado: %s con matricula %s\n", ptr->nombre, ptr->ptr->matricula);
+            return;
+        }
+        ptr = ptr->sig;
+    }
+    printf(" Matricula no encontrada.\n");
 }
 
 #endif
+
