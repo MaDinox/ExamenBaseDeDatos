@@ -43,5 +43,22 @@ int menuBajas(void){
     return subopcion;
 }
 
+int menuMostrar(void){
+    int subopcion;
+    printf("\n======== MOSTRAR ========\n");
+    printf("[1] Mostrar todos\n");
+    printf("[2] Mostrar por carrera\n");
+    printf("[3] Mostrar por semestre\n");
+    printf("[4] Mostrar por carrera y semestre\n");
+    printf("[5] Buscar por nombre\n");
+    printf("[6] Buscar por matricula\n");
+    printf("[7] Regresar\n");
+    printf("Opcion: ");
+    scanf("%d", &subopcion);
+    return subopcion;
+}
+
+
 #endif
+
 
