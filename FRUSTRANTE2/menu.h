@@ -33,6 +33,7 @@ int menuAltas(void){
 
 int menuBajas(void){
     int subopcion;
+    printf("-----------------------------------\n");
     printf("\n ----------- MENU BAJAS -----------\n");
     printf("[1] Eliminar una persona-alumno\n");
     printf("[2] Eliminar varias personas-alumnos\n");
@@ -45,7 +46,9 @@ int menuBajas(void){
 
 int menuMostrar(void){
     int subopcion;
-    printf("\n======== MOSTRAR ========\n");
+    printf("-----------------------------------\n");
+    printf("\n============= MOSTRAR =============\n");
+    printf("-----------------------------------\n");
     printf("[1] Mostrar todos\n");
     printf("[2] Mostrar por carrera\n");
     printf("[3] Mostrar por semestre\n");
@@ -58,7 +61,20 @@ int menuMostrar(void){
     return subopcion;
 }
 
+int menuEspeciales(void){
+    int subopcion;
+    printf("\n======== FUNCIONES ESPECIALES ========\n");
+    printf("--------------------------------------\n");
+    printf("1. Contar alumnos registrados\n");
+    printf("2. Contar alumnos por carrera\n");
+    printf("3. Promedio general de calificaciones\n");
+    printf("4. Promedio por carrera\n");
+    printf("5. Regresar\n");
+    printf("--------------------------------------\n");
+    printf("Opcion: ");
+    scanf("%d", &subopcion);
+    return subopcion;
+}
+
 
 #endif
-
-
